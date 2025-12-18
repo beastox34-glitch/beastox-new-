@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BEASTOX® | AI-Powered Strength Gear & Clean Nutrition</title>
+  <meta name="description" content="BeastOx — premium lifting gear + clean sports nutrition, powered by AI tools (calorie calculator, macro targets, meal plans). Unleash Your Inner Beast." />
+  <meta name="theme-color" content="#ff7a00" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BEASTOX® | Unleash Your Inner Beast" />
+  <meta property="og:description" content="Premium gym accessories + clean nutrition. Free AI tools: calorie calculator, macros, meal plans." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --panel2:#171717;
+      --stroke:#242424;
+      --text:#f5f5f5;
+      --muted:#a7a7a7;
+      --orange:#ff7a00;
+      --orange2:#ff9a3d;
+      --ok:#2dd4bf;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 18px 40px rgba(0,0,0,.45);
+      --radius: 22px;
+    }
+
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:radial-gradient(1200px 600px at 20% 0%, rgba(255,122,0,.10), transparent 60%),
+                 radial-gradient(900px 500px at 80% 10%, rgba(255,154,61,.08), transparent 55%),
+                 var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none;}
+    button{font-family:inherit;}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(14px);
+      background: rgba(11,11,11,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      max-width:1200px; margin:0 auto; padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:2px;
+    }
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:var(--orange);box-shadow:0 0 20px rgba(255,122,0,.55)}
+    .brand span{color:var(--orange)}
+
+    .navlinks{display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:flex-end;}
+    .navlinks a{color:var(--muted); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.8px;}
+    .navlinks a:hover{color:var(--text)}
+
+    .navcta{display:flex; align-items:center; gap:10px;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:700; font-size:13px;
+    }
+    .pill i{color:var(--orange)}
+    .btn{
+      border:0; cursor:pointer; user-select:none;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px; border-radius:999px;
+      font-weight:800; letter-spacing:.4px;
+    }
+    .btn-primary{background:linear-gradient(135deg,var(--orange),var(--orange2)); color:#060606; box-shadow: 0 10px 30px rgba(255,122,0,.22)}
+    .btn-primary:hover{filter:saturate(1.05); transform: translateY(-1px)}
+    .btn-ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.14)}
+    .btn-ghost:hover{border-color: rgba(255,122,0,.55)}
+
+    /* Layout helpers */
+    .wrap{max-width:1200px; margin:0 auto; padding:0 18px;}
+    .grid{display:grid; gap:16px;}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card-inner{padding:22px;}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      background:rgba(255,122,0,.10);
+      border:1px solid rgba(255,122,0,.22);
+      color:#ffd7b3;
+      font-weight:700; font-size:12px; letter-spacing:.5px; text-transform:uppercase;
+    }
+    .tag i{color:var(--orange)}
+    .muted{color:var(--muted)}
+    .kicker{color:#ffd7b3; font-weight:700; letter-spacing:1px; text-transform:uppercase; font-size:12px;}
+
+    /* Hero */
+    .hero{
+      padding:64px 0 26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero .wrap{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:center;}
+    .hero h1{
+      font-size:54px; line-height:1.03; margin:14px 0 14px;
+      letter-spacing:-.8px;
+    }
+    .hero h1 span{color:var(--orange)}
+    .hero p{font-size:16px; line-height:1.6; color:var(--muted); max-width:56ch;}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
+
+    .hero-side{
+      padding:18px;
+    }
+    .hero-side .panel{
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: radial-gradient(600px 220px at 30% 0%, rgba(255,122,0,.20), transparent 55%), rgba(255,255,255,.03);
+      padding:18px;
+    }
+    .metrics{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:12px;}
+    .metric{padding:14px; border-radius:18px; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.08)}
+    .metric b{display:block; font-size:18px; letter-spacing:.2px;}
+    .metric span{display:block; margin-top:6px; font-size:12px; color:var(--muted)}
+
+    /* Trust strip */
+    .trust{
+      padding:18px 0 0;
+    }
+    .trustbar{
+      display:grid; grid-template-columns: repeat(4, 1fr); gap:12px;
+      padding:14px;
+      border-radius:18px;
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .trustitem{display:flex; gap:10px; align-items:flex-start;}
+    .trustitem i{color:var(--orange); font-size:18px; margin-top:2px}
+    .trustitem b{display:block; font-size:13px;}
+    .trustitem small{display:block; color:var(--muted); margin-top:2px; line-height:1.35}
+
+    /* Sections */
+    section{padding:56px 0;}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:14px;}
+    .section-head h2{margin:0; font-size:30px; letter-spacing:-.4px;}
+    .section-head p{margin:0; color:var(--muted); max-width:70ch; line-height:1.5;}
+
+    /* Product grid */
+    .products{grid-template-columns: repeat(12, 1fr);}
+    .product{grid-column: span 4; overflow:hidden;}
+    .product .thumb{
+      height:160px;
+      background: radial-gradient(650px 240px at 30% 0%, rgba(255,122,0,.25), transparent 60%),
+                  radial-gradient(450px 180px at 80% 20%, rgba(255,154,61,.12), transparent 55%),
+                  rgba(255,255,255,.03);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:center;
+      position:relative;
+    }
+    .product .thumb .badge{
+      position:absolute; left:14px; top:14px;
+      padding:7px 10px; border-radius:999px;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:12px; font-weight:800;
+    }
+    .product .thumb i{font-size:42px; color:var(--orange)}
+    .product h3{margin:10px 0 6px; font-size:18px;}
+    .product ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.6; font-size:13px;}
+    .buyrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+    .buyrow a{flex:1; min-width:160px; text-align:center;}
+
+    /* AI tools */
+    .tools{grid-template-columns: repeat(12, 1fr); align-items:stretch;}
+    .tool{grid-column: span 6;}
+    .tool h3{margin:0 0 8px;}
+    .tool p{margin:0 0 14px; color:var(--muted); line-height:1.55}
+
+    .form{display:grid; grid-template-columns: repeat(12, 1fr); gap:10px;}
+    .field{grid-column: span 6;}
+    .field.full{grid-column: span 12;}
+    label{display:block; font-size:12px; font-weight:800; color:#d8d8d8; letter-spacing:.5px; text-transform:uppercase; margin:0 0 6px;}
+    input, select{
+      width:100%; padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.35);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus{border-color: rgba(255,122,0,.55); box-shadow: 0 0 0 4px rgba(255,122,0,.12)}
+
+    .result{
+      margin-top:14px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.35);
+    }
+    .result .row{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
+    .chip{
+      padding:9px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      font-size:12px; font-weight:800;
+    }
+
+    .plan{
+      margin-top:12px;
+      border-top:1px dashed rgba(255,255,255,.14);
+      padding-top:12px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13px;
+    }
+    .plan b{color:#fff}
+
+    /* Social proof */
+    .proof{grid-template-columns: repeat(12, 1fr);}
+    .quote{grid-column: span 4;}
+    .quote p{margin:0; color:#eaeaea; line-height:1.6}
+    .quote small{display:block; margin-top:10px; color:var(--muted)}
+
+    /* FAQ */
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      padding:14px 16px;
+    }
+    details + details{margin-top:10px;}
+    summary{cursor:pointer; font-weight:900;}
+    details p{margin:10px 0 0; color:var(--muted); line-height:1.6}
+
+    /* Footer */
+    footer{padding:40px 0; border-top:1px solid rgba(255,255,255,.08)}
+    .footergrid{display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap:14px; align-items:start;}
+    .footergrid h4{margin:0 0 10px;}
+    .footergrid a{display:block; color:var(--muted); margin:8px 0; font-weight:600}
+    .footergrid a:hover{color:var(--text)}
+    .fine{margin-top:18px; color:var(--muted); font-size:12px; line-height:1.6}
+
+    /* Floating Beast AI */
+    .fab{
+      position:fixed; right:18px; bottom:18px; z-index:2000;
+      display:flex; flex-direction:column; gap:10px; align-items:flex-end;
+    }
+    .fab-btn{
+      width:54px; height:54px; border-radius:999px;
+      border:0; cursor:pointer;
+      background:linear-gradient(135deg,var(--orange),var(--orange2));
+      color:#060606; font-weight:900;
+      box-shadow: 0 18px 40px rgba(255,122,0,.22);
+    }
+    .fab-panel{
+      width:min(420px, calc(100vw - 36px));
+      display:none;
+    }
+    .chat{
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(15,15,15,.94);
+      box-shadow: var(--shadow);
+    }
+    .chat-head{
+      padding:14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: radial-gradient(520px 140px at 25% 0%, rgba(255,122,0,.25), transparent 60%);
+    }
+    .chat-head b{letter-spacing:.2px;}
+    .chat-head small{display:block; color:var(--muted); margin-top:2px; font-weight:600}
+    .chat-body{max-height:320px; overflow:auto; padding:14px 16px;}
+    .msg{margin:10px 0; display:flex; gap:10px;}
+    .bubble{
+      padding:10px 12px; border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      line-height:1.5;
+      font-size:13px;
+    }
+    .me{justify-content:flex-end;}
+    .me .bubble{background: rgba(255,122,0,.14); border-color: rgba(255,122,0,.22)}
+    .chat-foot{display:flex; gap:10px; padding:12px; border-top:1px solid rgba(255,255,255,.08)}
+    .chat-foot input{flex:1; border-radius:999px;}
+    .chat-foot button{border-radius:999px;}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero .wrap{grid-template-columns:1fr;}
+      .trustbar{grid-template-columns:1fr 1fr;}
+      .product{grid-column: span 6;}
+      .tool{grid-column: span 12;}
+      .quote{grid-column: span 12;}
+      .footergrid{grid-template-columns:1fr;}
+      .hero h1{font-size:44px;}
+    }
+    @media (max-width: 520px){
+      .trustbar{grid-template-columns:1fr;}
+      .product{grid-column: span 12;}
+      .field{grid-column: span 12;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <div class="topbar">
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="BeastOx Home">
+        <span class="dot" aria-hidden="true"></span>
+        BEAST<span>OX</span>
+      </a>
+
+      <div class="navlinks" aria-label="Primary">
+        <a href="#shop">Shop</a>
+        <a href="#ai">Free AI Tools</a>
+        <a href="#proof">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
+      </div>
+
+      <div class="navcta">
+        <a class="pill" href="#ai" title="Free tools">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          Free Meal Plans
+        </a>
+        <a class="btn btn-primary" href="#shop">
+          <i class="fa-solid fa-bag-shopping"></i>
+          Shop BeastOx
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="wrap">
+      <div>
+        <span class="tag"><i class="fa-solid fa-bolt"></i> Premium gear • Clean nutrition • AI tools</span>
+        <h1>UNLEASH YOUR <span>INNER BEAST</span></h1>
+        <p>
+          BeastOx is built out of frustration: websites can look luxury, but the product arrives cheap.
+          We do it differently — <b>we test first, then we sell</b>.
+          And we add value with <b>free AI tools</b> (calories, macros, meal plans) so customers trust us before they buy.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#shop"><i class="fa-solid fa-fire"></i> Shop Bestsellers</a>
+          <a class="btn btn-ghost" href="#ai"><i class="fa-solid fa-brain"></i> Get Free Meal Plan</a>
+          <a class="btn btn-ghost" href="#about"><i class="fa-solid fa-shield-heart"></i> Why BeastOx</a>
+        </div>
+
+        <div class="trust">
+          <div class="trustbar">
+            <div class="trustitem">
+              <i class="fa-solid fa-check"></i>
+              <div>
+                <b>Tested Before Selling</b>
+                <small>Real gym testing, not just pretty photos.</small>
+              </div>
+            </div>
+            <div class="trustitem">
+              <i class="fa-solid fa-microscope"></i>
+              <div>
+                <b>Transparency First</b>
+                <small>Clear specs, clear materials, clear intent.</small>
+              </div>
+            </div>
+            <div class="trustitem">
+              <i class="fa-solid fa-truck-fast"></i>
+              <div>
+                <b>Fast Shipping</b>
+                <small>India-first logistics (website + Amazon).</small>
+              </div>
+            </div>
+            <div class="trustitem">
+              <i class="fa-solid fa-headset"></i>
+              <div>
+                <b>Support That Replies</b>
+                <small>Quick help + guidance for your goals.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="panel">
+          <div class="kicker">BeastOx AI</div>
+          <h2 style="margin:10px 0 8px; font-size:22px;">Instant Goals → Instant Plan</h2>
+          <p class="muted" style="margin:0; line-height:1.6;">
+            Use our free tools to calculate calories, macros and meal plans.
+            Then we recommend the right BeastOx gear + supplements.
+          </p>
+
+          <div class="metrics">
+            <div class="metric"><b>1 min</b><span>Calorie target</span></div>
+            <div class="metric"><b>3 clicks</b><span>Macro split</span></div>
+            <div class="metric"><b>Free</b><span>Meal plan</span></div>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="#ai" style="flex:1; min-width:190px;"><i class="fa-solid fa-calculator"></i> Start Now</a>
+            <a class="btn btn-ghost" href="#shop" style="flex:1; min-width:190px;"><i class="fa-solid fa-bag-shopping"></i> Shop Gear</a>
+          </div>
+
+          <div class="muted" style="margin-top:10px; font-size:12px; line-height:1.5;">
+            Note: Tools are guidance, not medical advice.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SHOP -->
+  <section id="shop">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Shop Bestsellers</h2>
+          <p>Built like premium. Priced like it’s worth it. Because it is.</p>
+        </div>
+        <a class="btn btn-ghost" href="#ai"><i class="fa-solid fa-wand-magic-sparkles"></i> Get Plan → Get Recommendation</a>
+      </div>
+
+      <div class="grid products">
+        <div class="card product">
+          <div class="thumb">
+            <span class="badge">Grip</span>
+            <i class="fa-solid fa-hand-fist" aria-hidden="true"></i>
+          </div>
+          <div class="card-inner">
+            <h3>BeastOx Liquid Chalk</h3>
+            <div class="muted" style="font-size:13px; line-height:1.6;">Instant grip • low mess • consistent dry feel</div>
+            <ul>
+              <li>Strong grip for pulls, presses, calisthenics</li>
+              <li>Designed to handle humid gyms</li>
+              <li>Sizes: 50ml / 100ml / 200ml / 250ml</li>
+            </ul>
+            <div class="buyrow">
+              <a class="btn btn-primary" href="https://www.beastox.in" target="_blank" rel="noreferrer"><i class="fa-solid fa-store"></i> Buy on Website</a>
+              <a class="btn btn-ghost" href="#" onclick="alert('Add your Amazon product link here (for Liquid Chalk).'); return false;"><i class="fa-brands fa-amazon"></i> Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="thumb">
+            <span class="badge">Support</span>
+            <i class="fa-solid fa-people-carry-box" aria-hidden="true"></i>
+          </div>
+          <div class="card-inner">
+            <h3>BeastOx Wrist Straps</h3>
+            <div class="muted" style="font-size:13px; line-height:1.6;">Less grip fatigue • more reps • more PRs</div>
+            <ul>
+              <li>Beast-grade stitching & cotton blend</li>
+              <li>Secure wrap for heavy pulls & rows</li>
+              <li>Built for durability (not disposable)</li>
+            </ul>
+            <div class="buyrow">
+              <a class="btn btn-primary" href="https://www.beastox.in" target="_blank" rel="noreferrer"><i class="fa-solid fa-store"></i> Buy on Website</a>
+              <a class="btn btn-ghost" href="#" onclick="alert('Add your Amazon product link here (for Wrist Straps).'); return false;"><i class="fa-brands fa-amazon"></i> Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="thumb">
+            <span class="badge">Power</span>
+            <i class="fa-solid fa-weight-hanging" aria-hidden="true"></i>
+          </div>
+          <div class="card-inner">
+            <h3>BeastOx Lever Belt</h3>
+            <div class="muted" style="font-size:13px; line-height:1.6;">Locked core • stable bracing • heavy days</div>
+            <ul>
+              <li>Premium leather outside + suede inside</li>
+              <li>Lever buckle for fast, consistent tightness</li>
+              <li>Multiple sizes available</li>
+            </ul>
+            <div class="buyrow">
+              <a class="btn btn-primary" href="https://www.beastox.in" target="_blank" rel="noreferrer"><i class="fa-solid fa-store"></i> Buy on Website</a>
+              <a class="btn btn-ghost" href="#" onclick="alert('Add your Amazon product link here (for Lever Belt).'); return false;"><i class="fa-brands fa-amazon"></i> Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="thumb">
+            <span class="badge">Coming</span>
+            <i class="fa-solid fa-flask" aria-hidden="true"></i>
+          </div>
+          <div class="card-inner">
+            <h3>Clean Nutrition (Upcoming)</h3>
+            <div class="muted" style="font-size:13px; line-height:1.6;">Whey • isolate • creatine • pre-workout</div>
+            <ul>
+              <li>Simple formulas, clear label</li>
+              <li>Goal-based recommendations via BeastOx AI</li>
+              <li>Launch alerts + early-bird perks</li>
+            </ul>
+            <div class="buyrow">
+              <a class="btn btn-primary" href="#newsletter"><i class="fa-solid fa-bell"></i> Get Launch Alert</a>
+              <a class="btn btn-ghost" href="#ai"><i class="fa-solid fa-brain"></i> Get Macro Target</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card product" style="grid-column: span 12;">
+          <div class="card-inner" style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+            <div style="min-width:260px;">
+              <div class="tag"><i class="fa-solid fa-crown"></i> Premium Experience</div>
+              <h3 style="margin:10px 0 6px;">Make customers buy just by looking</h3>
+              <div class="muted" style="line-height:1.6;">Add your product photos + Amazon links and this page becomes a high-conversion store front.</div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="https://www.beastox.in" target="_blank" rel="noreferrer"><i class="fa-solid fa-store"></i> Open Beastox.in</a>
+              <a class="btn btn-ghost" href="#ai"><i class="fa-solid fa-wand-magic-sparkles"></i> Use Free Tools</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AI TOOLS -->
+  <section id="ai">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Free AI Tools</h2>
+          <p>
+            Inspired by the best sports nutrition sites: quick calculators + instant help.
+            Use these to get your targets, then BeastOx recommends what to buy.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid tools">
+        <!-- Calorie + Macro Calculator -->
+        <div class="card tool">
+          <div class="card-inner">
+            <span class="tag"><i class="fa-solid fa-calculator"></i> Calories + Macros</span>
+            <h3 style="margin-top:12px;">Calorie & Macro Calculator</h3>
+            <p>Enter your details and get maintenance calories + goal calories + macro split.</p>
+
+            <form class="form" onsubmit="event.preventDefault(); calculate();">
+              <div class="field">
+                <label>Sex</label>
+                <select id="sex" required>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Goal</label>
+                <select id="goal" required>
+                  <option value="cut">Fat Loss (Cut)</option>
+                  <option value="maintain">Maintain</option>
+                  <option value="bulk">Muscle Gain (Lean Bulk)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Age</label>
+                <input id="age" type="number" min="13" max="90" value="25" required />
+              </div>
+              <div class="field">
+                <label>Height (cm)</label>
+                <input id="height" type="number" min="120" max="230" value="175" required />
+              </div>
+              <div class="field">
+                <label>Weight (kg)</label>
+                <input id="weight" type="number" min="30" max="250" value="75" required />
+              </div>
+              <div class="field">
+                <label>Activity</label>
+                <select id="activity" required>
+                  <option value="1.2">Sedentary (little exercise)</option>
+                  <option value="1.375">Light (1–3 days/week)</option>
+                  <option value="1.55" selected>Moderate (3–5 days/week)</option>
+                  <option value="1.725">Very Active (6–7 days/week)</option>
+                  <option value="1.9">Athlete (2x/day)</option>
+                </select>
+              </div>
+
+              <div class="field full" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-wand-magic-sparkles"></i> Calculate</button>
+                <button class="btn btn-ghost" type="button" onclick="fillExample();"><i class="fa-solid fa-bolt"></i> Example</button>
+              </div>
+            </form>
+
+            <div id="calcResult" class="result" style="display:none;">
+              <b>Results</b>
+              <div class="muted" id="calcSubtitle" style="margin-top:6px; line-height:1.6;"></div>
+              <div class="row" id="calcChips"></div>
+              <div class="plan" id="recProducts"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meal Plan Generator -->
+        <div class="card tool">
+          <div class="card-inner">
+            <span class="tag"><i class="fa-solid fa-utensils"></i> Meal Plan</span>
+            <h3 style="margin-top:12px;">Free 1-Day Meal Plan Generator</h3>
+            <p>Pick your diet style and we’ll generate a simple plan that matches your goal calories.</p>
+
+            <form class="form" onsubmit="event.preventDefault(); makeMealPlan();">
+              <div class="field">
+                <label>Diet Preference</label>
+                <select id="diet" required>
+                  <option value="veg">Vegetarian</option>
+                  <option value="nonveg">Non-Veg</option>
+                  <option value="highprotein">High Protein</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Meals per day</label>
+                <select id="meals" required>
+                  <option value="4">4 meals</option>
+                  <option value="5" selected>5 meals</option>
+                  <option value="6">6 meals</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Target Calories</label>
+                <input id="targetCals" type="number" min="1200" max="5000" value="2400" required />
+              </div>
+              <div class="field">
+                <label>Training Time</label>
+                <select id="train" required>
+                  <option value="morning">Morning</option>
+                  <option value="evening" selected>Evening</option>
+                </select>
+              </div>
+
+              <div class="field full" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-bowl-food"></i> Generate Plan</button>
+                <button class="btn btn-ghost" type="button" onclick="useCalcCalories();"><i class="fa-solid fa-link"></i> Use Calculator Calories</button>
+              </div>
+            </form>
+
+            <div id="planBox" class="result" style="display:none;">
+              <b>Your Plan</b>
+              <div class="muted" id="planMeta" style="margin-top:6px;"></div>
+              <div class="plan" id="planText"></div>
+              <div class="plan" style="margin-top:12px;">
+                <b>BeastOx Add-on Suggestion:</b>
+                Liquid Chalk for heavy days • Wrist Straps for pull days • (Coming) Whey + Creatine for recovery.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="card-inner" style="display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <div>
+            <div class="kicker">AI Roadmap</div>
+            <h3 style="margin:8px 0 6px;">Want real AI Chat + saved plans?</h3>
+            <div class="muted" style="line-height:1.6;">We can connect this site to an AI assistant (OpenAI/API) to generate weekly meal plans, workouts, and product recommendations per user.</div>
+          </div>
+          <a class="btn btn-primary" href="#newsletter"><i class="fa-solid fa-envelope"></i> Get Early Access</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section id="proof">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>What lifters say</h2>
+          <p>Social proof that converts. Replace these with your real customer reviews anytime.</p>
+        </div>
+      </div>
+
+      <div class="grid proof">
+        <div class="card quote"><div class="card-inner">
+          <span class="tag"><i class="fa-solid fa-star"></i> 5.0</span>
+          <p>“Chalk dries fast and the grip stays insane even in a humid gym.”</p>
+          <small>— Verified buyer • Deadlift day</small>
+        </div></div>
+        <div class="card quote"><div class="card-inner">
+          <span class="tag"><i class="fa-solid fa-star"></i> 5.0</span>
+          <p>“Straps feel premium. Stitching is solid, not the cheap stuff.”</p>
+          <small>— Verified buyer • Pull day</small>
+        </div></div>
+        <div class="card quote"><div class="card-inner">
+          <span class="tag"><i class="fa-solid fa-star"></i> 4.9</span>
+          <p>“Belt locks tight instantly. Bracing feels stable for heavy squats.”</p>
+          <small>— Verified buyer • Squat PR</small>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>FAQ</h2>
+          <p>Answer objections before they leave. This is how premium sites sell.</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>Why BeastOx is priced higher than local brands?</summary>
+        <p>Because materials, labor and testing aren’t cheap. We build for durability and performance — not for one-month use.</p>
+      </details>
+      <details>
+        <summary>How do I pick the right gear?</summary>
+        <p>Use the Free AI Tools above (goal + calories). We’ll recommend the best gear for your training days — grip for pulls, support for heavy compounds.</p>
+      </details>
+      <details>
+        <summary>Are the AI tools free?</summary>
+        <p>Yes. The calorie calculator and meal plan generator are free. For advanced weekly plans + saved profiles, we can add full AI login later.</p>
+      </details>
+      <details>
+        <summary>Do you sell on Amazon?</summary>
+        <p>Yes — and you can also buy from Beastox.in for special goodies. (Add your exact Amazon links into the buttons in this file.)</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>About BeastOx</h2>
+          <p>
+            The BeastOx story is simple: luxury-looking listings… cheap reality. We were done with it.
+            So we built a brand with one rule — <b>try it first, sell it later</b>.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" style="grid-template-columns:repeat(12, 1fr);">
+        <div class="card" style="grid-column: span 7;">
+          <div class="card-inner">
+            <span class="tag"><i class="fa-solid fa-shield"></i> Transparency</span>
+            <h3 style="margin:12px 0 8px;">No hidden junk. No fake claims.</h3>
+            <p class="muted" style="line-height:1.7; margin:0;">
+              The best supplement brands win by trust: clear categories, fast answers, calculators, and visible proof.
+              BeastOx brings that energy — plus gear that survives real training.
+            </p>
+            <div class="plan">
+              <b>What we add next (optional):</b>
+              COA/3rd-party test uploads, QR scan per product, and an AI coach that answers supplement + gear questions.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 5;">
+          <div class="card-inner">
+            <span class="tag"><i class="fa-solid fa-gift"></i> Website Perks</span>
+            <h3 style="margin:12px 0 8px;">Buy from Beastox.in → Get goodies</h3>
+            <p class="muted" style="line-height:1.7; margin:0;">Reward customers for ordering directly:</p>
+            <ul style="margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.8; font-size:13px;">
+              <li>Stickers + thank-you card</li>
+              <li>Free sample sachet (when supplements launch)</li>
+              <li>Exclusive discount codes for repeat orders</li>
+              <li>Early access to drops</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="newsletter" class="card" style="margin-top:16px;">
+        <div class="card-inner" style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <div>
+            <div class="kicker">Launch Alerts + AI Beta</div>
+            <h3 style="margin:8px 0 6px;">Get updates for Whey, Creatine & Pre-Workout</h3>
+            <div class="muted">Add your email system later (Shopify/Klaviyo). For now, this is a high-conversion section.</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input id="email" type="email" placeholder="you@example.com" style="min-width:240px;" />
+            <button class="btn btn-primary" onclick="subscribe();"><i class="fa-solid fa-paper-plane"></i> Notify Me</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footergrid">
+        <div>
+          <div class="brand" style="margin-bottom:10px;"><span class="dot"></span> BEAST<span>OX</span></div>
+          <div class="muted" style="line-height:1.7;">Premium lifting gear + clean nutrition. Built by athletes. Tested by beasts.</div>
+          <div class="fine">
+            Disclaimer: Tools on this page provide general fitness guidance and are not medical advice.
+          </div>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <a href="#shop">Bestsellers</a>
+          <a href="#ai">Free AI Tools</a>
+          <a href="https://www.beastox.in" target="_blank" rel="noreferrer">Beastox.in</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="#faq">FAQ</a>
+          <a href="#" onclick="alert('Add WhatsApp/Email support link here.'); return false;">Contact</a>
+          <a href="#" onclick="alert('Add policy pages links here (shipping/returns/privacy).'); return false;">Policies</a>
+        </div>
+      </div>
+
+      <div class="fine" style="margin-top:24px;">
+        © <span id="year"></span> BEASTOX® Private Limited • Transparency • Strength • Innovation
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Beast AI (offline demo) -->
+  <div class="fab" aria-label="Beast AI">
+    <div class="fab-panel" id="fabPanel">
+      <div class="chat">
+        <div class="chat-head">
+          <div>
+            <b>Beast AI (Demo)</b>
+            <small>Ask about gear, macros, or buying</small>
+          </div>
+          <button class="btn btn-ghost" style="padding:10px 12px;" onclick="toggleChat();" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="msg"><div class="bubble">👋 Welcome to BeastOx. Type: <b>meal</b>, <b>calories</b>, <b>chalk</b>, <b>straps</b>, <b>belt</b>, or <b>amazon</b>.</div></div>
+        </div>
+        <div class="chat-foot">
+          <input id="chatInput" type="text" placeholder="Ask Beast AI…" onkeydown="if(event.key==='Enter'){sendChat();}" />
+          <button class="btn btn-primary" onclick="sendChat();"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <button class="fab-btn" onclick="toggleChat();" title="Beast AI">
+      <i class="fa-solid fa-brain"></i>
+    </button>
+  </div>
+
+  <script>
+    // ===== Helpers =====
+    const $ = (id) => document.getElementById(id);
+    $('year').textContent = new Date().getFullYear();
+
+    function round(n){ return Math.round(n); }
+
+    // ===== Calculator (Mifflin-St Jeor) =====
+    // BMR male = 10W + 6.25H - 5A + 5
+    // BMR female = 10W + 6.25H - 5A - 161
+    function calculate(){
+      const sex = $('sex').value;
+      const goal = $('goal').value;
+      const age = parseFloat($('age').value);
+      const height = parseFloat($('height').value);
+      const weight = parseFloat($('weight').value);
+      const activity = parseFloat($('activity').value);
+
+      if(!age || !height || !weight) return;
+
+      let bmr = (10*weight) + (6.25*height) - (5*age) + (sex === 'male' ? 5 : -161);
+      let tdee = bmr * activity;
+
+      // goal adjustment
+      let target = tdee;
+      let goalText = 'Maintenance';
+      if(goal === 'cut'){ target = tdee * 0.85; goalText = 'Fat Loss (Cut)'; }
+      if(goal === 'bulk'){ target = tdee * 1.10; goalText = 'Lean Bulk'; }
+
+      // protein target: 1.8g/kg (cut), 1.6g/kg (maintain), 2.0g/kg (bulk)
+      let p = weight * (goal === 'cut' ? 1.8 : (goal === 'bulk' ? 2.0 : 1.6));
+      // fat target: 0.8g/kg (cut), 0.9 (maintain), 1.0 (bulk)
+      let f = weight * (goal === 'cut' ? 0.8 : (goal === 'bulk' ? 1.0 : 0.9));
+      // carbs remaining
+      const caloriesP = p * 4;
+      const caloriesF = f * 9;
+      let calsLeft = target - (caloriesP + caloriesF);
+      let c = Math.max(0, calsLeft / 4);
+
+      // Update UI
+      $('calcResult').style.display = 'block';
+      $('calcSubtitle').textContent = `Goal: ${goalText} • Estimated maintenance: ${round(tdee)} kcal/day`;
+
+      const chips = [
+        `Target Calories: ${round(target)} kcal`,
+        `Protein: ${round(p)} g`,
+        `Carbs: ${round(c)} g`,
+        `Fat: ${round(f)} g`
+      ];
+      $('calcChips').innerHTML = chips.map(x => `<span class="chip">${x}</span>`).join('');
+
+      // Save target for meal plan
+      $('targetCals').value = round(target);
+
+      // Product recommendations (simple logic)
+      const rec = [];
+      rec.push('If your training includes heavy pulls → <b>Wrist Straps</b>.');
+      rec.push('If grip fails before muscles → <b>Liquid Chalk</b>.');
+      rec.push('If bracing limits your squat/deadlift → <b>Lever Belt</b>.');
+      if(goal === 'bulk') rec.push('For recovery & growth → (Upcoming) <b>Whey + Creatine</b>.');
+      if(goal === 'cut') rec.push('For adherence → high-protein meals + (Upcoming) clean <b>Whey Isolate</b>.');
+
+      $('recProducts').innerHTML = `<b>Recommended (based on your goal):</b><br>• ${rec.join('<br>• ')}`;
+    }
+
+    function fillExample(){
+      $('sex').value = 'male';
+      $('goal').value = 'bulk';
+      $('age').value = 24;
+      $('height').value = 178;
+      $('weight').value = 80;
+      $('activity').value = '1.55';
+      calculate();
+    }
+
+    function useCalcCalories(){
+      const shown = $('calcResult').style.display !== 'none';
+      if(!shown){
+        alert('Run the calorie calculator first, then click this.');
+        return;
+      }
+      // targetCals is already updated by calculate()
+      document.getElementById('planBox')?.scrollIntoView({behavior:'smooth'});
+    }
+
+    // ===== Meal plan generator (simple templates) =====
+    function makeMealPlan(){
+      const diet = $('diet').value;
+      const meals = parseInt($('meals').value, 10);
+      const train = $('train').value;
+      const target = parseInt($('targetCals').value, 10);
+
+      const perMeal = Math.round(target / meals);
+
+      const veg = [
+        'Breakfast: Oats + milk/curd + banana + peanuts (or whey when launched)',
+        'Meal: Paneer/tofu + rice/roti + salad',
+        'Snack: Greek yogurt/curd + fruit',
+        'Meal: Dal + roti + sabzi + ghee (small)',
+        'Post-workout: Banana + milk + (future) whey'
+      ];
+      const nonveg = [
+        'Breakfast: Eggs + toast/poha + fruit',
+        'Meal: Chicken/fish + rice + salad',
+        'Snack: Curd + nuts OR peanut butter sandwich',
+        'Meal: Dal + roti + chicken curry (lean) + veggies',
+        'Post-workout: Banana + milk + (future) whey'
+      ];
+      const highprotein = [
+        'Breakfast: Omelette/paneer bhurji + fruit',
+        'Meal: Lean protein (chicken/paneer/tofu) + rice + salad',
+        'Snack: Curd/Greek yogurt + nuts',
+        'Meal: Dal + extra protein portion + veggies',
+        'Post-workout: (future) Whey + banana'
+      ];
+
+      let base = veg;
+      if(diet === 'nonveg') base = nonveg;
+      if(diet === 'highprotein') base = highprotein;
+
+      // adjust number of meals (trim/extend)
+      const plan = [];
+      for(let i=0;i<meals;i++){
+        plan.push(base[i % base.length]);
+      }
+
+      // training timing hint
+      const timing = (train === 'morning')
+        ? 'Tip: Keep carbs higher in breakfast + post-workout.'
+        : 'Tip: Keep carbs higher in pre-workout snack + dinner/post-workout.';
+
+      $('planBox').style.display = 'block';
+      $('planMeta').textContent = `${target} kcal/day • ~${perMeal} kcal per meal • ${diet.toUpperCase()} • Training: ${train}`;
+
+      $('planText').innerHTML = plan.map((line, idx) => `<b>Meal ${idx+1}:</b> ${line}<br>`).join('')
+        + `<br><b>${timing}</b><br><span class="muted">(Swap foods based on preference. Keep protein high and track weekly progress.)</span>`;
+    }
+
+    // ===== Newsletter (demo) =====
+    function subscribe(){
+      const email = $('email').value.trim();
+      if(!email || !email.includes('@')){
+        alert('Please enter a valid email.');
+        return;
+      }
+      alert('✅ You are subscribed (demo). Connect Shopify/Klaviyo later for real emails.');
+      $('email').value = '';
+    }
+
+    // ===== Floating chat (offline demo) =====
+    function toggleChat(){
+      const p = $('fabPanel');
+      const isOpen = p.style.display === 'block';
+      p.style.display = isOpen ? 'none' : 'block';
+      if(!isOpen){
+        setTimeout(() => $('chatInput').focus(), 120);
+      }
+    }
+
+    function addMsg(text, mine=false){
+      const body = $('chatBody');
+      const div = document.createElement('div');
+      div.className = 'msg' + (mine ? ' me' : '');
+      div.innerHTML = `<div class="bubble">${text}</div>`;
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function sendChat(){
+      const input = $('chatInput');
+      const q = input.value.trim();
+      if(!q) return;
+      addMsg(q, true);
+      input.value = '';
+
+      const t = q.toLowerCase();
+      let a = "I'm Beast AI (demo). Try: meal, calories, chalk, straps, belt, amazon.";
+
+      if(t.includes('cal')) a = "Use the <b>Calorie & Macro Calculator</b> above. Then click <b>Generate Meal Plan</b>.";
+      else if(t.includes('meal')) a = "Go to <b>Free 1-Day Meal Plan Generator</b>. Pick veg/non-veg, meals/day, target calories. Boom.";
+      else if(t.includes('chalk')) a = "If grip fails before muscles: <b>Liquid Chalk</b>. Fast dry, low mess, stable grip.";
+      else if(t.includes('strap')) a = "For heavy pulls & rows: <b>Wrist Straps</b>. Less grip fatigue → more reps.";
+      else if(t.includes('belt')) a = "For bracing & heavy compounds: <b>Lever Belt</b>. Consistent tightness every set.";
+      else if(t.includes('amazon')) a = "We sell on Amazon too. Add your exact Amazon links inside this HTML file for each product button.";
+
+      setTimeout(()=> addMsg(a,false), 350);
+    }
+  </script>
+</body>
+</html>
